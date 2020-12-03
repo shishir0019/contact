@@ -6,19 +6,14 @@ const getImage = (sex) => {
     return path;
 }
 
-const click = (item) => {
-    Alert.alert(item.name);
-}
-
 const Item = ({ item }) => {
     return (
         <Pressable style={styles.item} onPress={() => Alert.alert(item.name)} android_ripple={{ color: 'grey', borderless: false, radius: 50 }}>
-            <Image style={{ width: 25, height: 25 }} source={getImage(item.sex)} />
-            <Text style={{ paddingHorizontal: 5 }}>{item.name}</Text>
+            <Image style={{ width: 40, height: 40 }} source={getImage(item.sex)} />
+            <Text style={{ paddingHorizontal: 20, fontSize:20 }}>{item.name}</Text>
         </Pressable>
     )
 }
-
 
 const ListItems = ({ list }) => {
     return (
@@ -53,7 +48,7 @@ const ContactView = () => {
     if (!isLoad) {
         return (
             <View>
-                <Text style={{ paddingHorizontal: 10, paddingVertical: 5, color: 'blue', backgroundColor: '#eaeaea' }}>Contact List</Text>
+                <Text style={styles.title}>Contact List</Text>
                 <View style={styles.loading}>
                     <ActivityIndicator size="large" color="#0000ff" />
                 </View>
@@ -62,7 +57,7 @@ const ContactView = () => {
     }
     return (
         <View>
-            <Text style={{ paddingHorizontal: 10, paddingVertical: 5, color: 'blue', backgroundColor: '#eaeaea' }}>Contact List</Text>
+            <Text style={styles.title}>Contact List</Text>
             {/* <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, }} /> */}
             <ListItems list={list} />
         </View>
@@ -77,12 +72,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     item: {
-        padding: 10,
+        padding: 7,
         flexDirection: 'row',
         alignItems: 'center',
     },
     loading: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    title:{
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        backgroundColor: '#f1f1f1',
+        fontSize: 20,
+        color: '#333'
     }
 });
