@@ -1,7 +1,7 @@
 export const list = [
     {
         id: 1,
-        name: 'Shishir',
+        name: 'Asaduzzaman Shishir',
         number: '01717605715',
         sex: 'male',
         category: 'friend',
@@ -17,7 +17,7 @@ export const list = [
     },
     {
         id: 3,
-        name: 'Sum Sumon',
+        name: 'Mizanur Rahman',
         number: '01711604410',
         sex: 'male',
         category: 'friend',
@@ -25,10 +25,18 @@ export const list = [
     },
     {
         id: 4,
-        name: 'Mustafiz',
+        name: 'Mustafizur Rahman',
         number: '01718312223',
         sex: 'male',
         category: 'friend',
         email: 'mostafiz_sohag@gmail.com'
+    },
+    {
+        id: 5,
+        name: 'Sayed Muktadir',
+        number: '01718332223',
+        sex: 'male',
+        category: 'friend',
+        email: 'sayed_islam@gmail.com'
     },
 ]
