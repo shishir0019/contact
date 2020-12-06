@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, Modal, Alert, RefreshControl, Dimensions, TouchableOpacity, Button } from 'react-native';
+import { View, Text, FlatList, Image, RefreshControl, TouchableOpacity, Button, Alert } from 'react-native';
 import { styles } from "../assets/style";
 import Loading from "./Loading";
 
@@ -8,7 +8,7 @@ const getImage = (sex) => {
     return path;
 }
 
-const ContactView = () => {
+const ContactView = ({ navigation }) => {
     const [isLoad, setIsLoad] = useState(false);
     const [list, setList] = useState([]);
     const [error, setError] = useState(false);
@@ -24,7 +24,7 @@ const ContactView = () => {
                 const { list } = require('../shared/contacts');
                 setList(list);
                 setIsLoad(true);
-            }, 2000);
+            }, 1000);
         } catch (error) {
             setError(true)
         }
@@ -32,7 +32,7 @@ const ContactView = () => {
 
     const Item = ({ item }) => {
         return (
-            <TouchableOpacity style={styles.item}>
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Detail', { id: item.id })}>
                 <Image style={{ width: 25, height: 25 }} source={getImage(item.sex)} />
                 <Text style={{ paddingHorizontal: 5 }}>{item.name}</Text>
             </TouchableOpacity>
@@ -50,26 +50,28 @@ const ContactView = () => {
         )
     }
 
-    const GridItems = ({ list }) => {
+    const NewContact = ({ }) => {
         return (
-            <View>
-
-            </View>
+            <TouchableOpacity style={styles.floatingButton} onPress={() => Alert.alert('Clicked')}>
+                <Text style={{ color: '#fff' }}>+</Text>
+            </TouchableOpacity>
         )
     }
+
     if (!error) {
         if (!isLoad) {
             return (
-                <View style={{ height: Math.round(Dimensions.get('window').height) - 100 }}>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.subTitle}>Contact List</Text>
                     <Loading message={'Loading'} size={'small'} />
                 </View>
             );
         }
         return (
-            <View>
+            <View style={{ flex: 1, position: 'relative' }}>
                 <Text style={styles.subTitle}>Contact List</Text>
                 <ListItems list={list} />
+                <NewContact />
             </View>
         );
     }

@@ -1,33 +1,39 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { styles } from "./assets/style";
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import SQLite from 'react-native-sqlite-storage';
+
+SQLite.enablePromise(true);
+
+global.db = SQLite.openDatabase(
+  {
+    name: 'SQLite',
+    location: 'default',
+    createFromLocation: '~SQLite.db',
+  },
+  () => { },
+  error => {
+    console.log("ERROR: " + error);
+  }
+);
 
 const Stack = createStackNavigator();
 
 import ContactView from './components/ContactView';
-
-const Home = () => {
-  return (
-    <View style={{ marginTop: getStatusBarHeight(), ...styles.main }}>
-      <Text style={styles.title}>Contact Maneger</Text>
-      <ContactView />
-    </View>
-  )
-}
-
+import ContactDetail from './components/ContactDetail';
 
 const App = (props) => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={ContactView} options={{ title: 'Contacts' }} />
+        <Stack.Screen name="Detail" component={ContactDetail} options={{ title: 'Details' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
+
+
