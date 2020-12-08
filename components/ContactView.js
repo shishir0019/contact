@@ -52,8 +52,8 @@ const ContactView = ({ navigation }) => {
 
     const NewContact = ({ }) => {
         return (
-            <TouchableOpacity style={styles.floatingButton} onPress={() => Alert.alert('Clicked')}>
-                <Text style={{ color: '#fff' }}>+</Text>
+            <TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('New')}>
+                <Text style={{ color: '#fff', fontSize: 30, marginTop: -5 }}>+</Text>
             </TouchableOpacity>
         )
     }
